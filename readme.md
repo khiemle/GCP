@@ -40,9 +40,13 @@ dd if=/dev/urandom | gzip -9 >> /dev/null &
 
 
 ## Useful commands
-copy file to instance
+Copy file to instance
 ```
 gcloud compute scp <file> <instance name>:~\...
+```
+Rename multi files
+```
+find . -type f -name 'notes.md' -execdir mv {} readme.md \;
 ```
 
 
