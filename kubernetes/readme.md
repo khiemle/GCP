@@ -33,3 +33,9 @@ Add `--watch` to check status
 * kubectl get services
 * kubectl describe <exactl_name>
 ```
+
+## Checking the kubectl context
+```
+kubectl config get-contexts
+kubectl config use-context docker-for-desktop
+```
