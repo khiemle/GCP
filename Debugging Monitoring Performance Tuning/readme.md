@@ -1,5 +1,14 @@
+# Troubleshooting networking issues
+- ping (but only icmp not tcp/udp)
+
 # Stackdriver
 ![alt text](../images/stackdriver.png)
+- Logs from syslog
+- Metric will be created from specitific logs
+- Use cross platform: on premises, cloud, hybrid... 
+- Stackdriver agents will use the default service account of VM,...
+- can export to Big Query(analysis), Cloud pub/sub(streaming message),
+cloud storage (back up)
 
 ## Monitoring
 
@@ -10,7 +19,7 @@
 - Reduce costs based on usage patterns
 - Compare experimental configurations
 - Raise alerts if something broken (about broken)
-210831107
+
 1. Metrics: 
     * Platform 
     * System 
@@ -98,3 +107,25 @@ Production
 ## Summary
 
 ![alt text](../images/stackdriver-description.png)
+
+
+## Using serial port 
+- Debugging a custom VM
+- An instance's BIOS, bootloader, and kernel will print their debug  message to serial port output --> can get valuable infor about any error
+- enable serial port output logging to Stackdiver --> can access the infor even the instance is not running
+
+## Analyze invalid disk from any VM
+- detatch disk from current
+- create new debug VM and attach the disk
+- run
+    * check root partition
+    ```
+    sudo fsck /dev/sdb1
+    ```
+    * check file system
+    ```
+    sudo mkdir /mydisk
+    sudo mount /dev/sdb1 /mydisk
+    ```
+    * check the disk has kernel files
+

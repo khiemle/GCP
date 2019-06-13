@@ -49,6 +49,12 @@ Rename multi files
 find . -type f -name 'notes.md' -execdir mv {} readme.md \;
 ```
 
+## O Auth 2.0 Web flow
 
+## Using services account key json
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS="<path to service account json file>"
+```
 
 

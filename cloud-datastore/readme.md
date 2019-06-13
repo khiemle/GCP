@@ -122,16 +122,48 @@ Iterator<Entity> tasks = datastore.get(taskKey1, taskKey2);
 ## Queries
 - kind
 - filters (zero or more)
+    * key filters
+    ```
+        Query<Entity> query = Query.newEntityQueryBuilder()
+        .setKind("Task")
+        .setFilter(PropertyFilter.gt("__key__", keyFactory.newKey("someTask")))
+        .build();
+    ```
+    * properties filters
+    ```
+        Query<Entity> query =
+        Query.newEntityQueryBuilder().setKind("Task").setFilter(PropertyFilter.eq("done", false))
+        .build();
+    ```
+    * composite filters
+    ```
+        Query<Entity> query = Query.newEntityQueryBuilder()
+            .setKind("Task")
+            .setFilter(CompositeFilter.and(
+                PropertyFilter.eq("done", false), PropertyFilter.ge("priority", 4)))
+            .setOrderBy(OrderBy.desc("priority"))
+            .build();
+    ```
 - sort orders (zero or more)
-
+- special queries
+    * ancestors queries
+    ```
+        Query<Entity> query = Query.newEntityQueryBuilder()
+        .setKind("Task")
+        .setFilter(PropertyFilter.hasAncestor(
+            datastore.newKeyFactory().setKind("TaskList").newKey("default")))
+        .build();
+    ```
+    * kindless queries
+        - can't include filters or sort orders on properties
+        - can filter on entity key, and ancestor query
+    * projection queries
+        - specified properties
+        - require specified properties to be indexed
+        - key-only queries: low latency
 - Java
 ```
-Query<Entity> query = Query.newEntityQueryBuilder()
-    .setKind("Task")
-    .setFilter(CompositeFilter.and(
-        PropertyFilter.eq("done", false), PropertyFilter.ge("priority", 4)))
-    .setOrderBy(OrderBy.desc("priority"))
-    .build();
+QueryResults<Entity> tasks = datastore.run(query);
 ```
 
 
