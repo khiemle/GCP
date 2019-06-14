@@ -20,10 +20,20 @@ chmod +x cloud_sql_proxy
 
 ## SQL syntax
 
+### JOIN
 
-petabyte transfer applanie
-intermitent timeout - vpc flow logs
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- OUTTER JOIN
+- CROSS JOIN
+
+![alt text](../images/sql-join.png)
+
+### UNION
+- UNION ALL
 
 
-CLOUD SECURITY SCANNER
-Automatically scan your App Engine, Compute Engine, and Google Kubernetes Engine apps for common vulnerabilities
+
+
+
