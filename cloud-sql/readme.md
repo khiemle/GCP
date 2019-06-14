@@ -26,9 +26,14 @@ chmod +x cloud_sql_proxy
 - LEFT JOIN
 - RIGHT JOIN
 - OUTTER JOIN
-- CROSS JOIN
 
 ![alt text](../images/sql-join.png)
+
+- CROSS JOIN
+
+![alt text](../images/cross-join.png)
+
+
 
 ### UNION
 - UNION ALL
