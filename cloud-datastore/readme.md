@@ -1,5 +1,6 @@
 
 ## Concept
+- ` joins and aggregate queries aren't supported within the Datastore mode query engine`
 - Entity & Kind
     * Ancestor path: can't be change after entity's created, pernament
     * Root entity is the entity without parent entity
@@ -48,6 +49,56 @@
         ```
         Key taskKey = datastore.newKeyFactory().setKind("Task").newKey("sampleTask");
         ```
+
+## Restrictions on queries
+- `substring matches`
+- `case-insensitive matches`
+- `so-called full-text search`
+- `NOT, OR, and !=`
+
+### Entities lacking a property named in the query are ignored
+
+### Filtering on unindexed properties returns no results
+
+### Inequality filters are limited to at most one property
+
+- inequality comparisons (LESS_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL)
+- can use `inequality comparisons` on same `property`
+- two properties --> can't 
+- can: combine 1 `equality` and one or more `inequality` on same properties
+
+### Ordering of query results is undefined when no sort order is specified
+### Sort orders are ignored on properties with equality filters
+### Properties used in inequality filters must be sorted first
+`valid`
+```
+Query query = new Query("Task")
+{
+    Filter = Filter.GreaterThan("priority", 3),
+    Order = { { "priority", PropertyOrder.Types.Direction.Ascending},
+        {"created", PropertyOrder.Types.Direction.Ascending } }
+};
+```
+
+`not valid`
+```
+Query query = new Query("Task")
+{
+    Filter = Filter.GreaterThan("priority", 3),
+    Order = { { "created", PropertyOrder.Types.Direction.Ascending } }
+};
+```
+
+`not valid`
+```
+Query query = new Query("Task")
+{
+    Filter = Filter.GreaterThan("priority", 3),
+    Order = { {"created", PropertyOrder.Types.Direction.Ascending },
+        { "priority", PropertyOrder.Types.Direction.Ascending} }
+};
+```
+
 
 ## Development
 
@@ -120,6 +171,16 @@ Iterator<Entity> tasks = datastore.get(taskKey1, taskKey2);
 ```
 
 ## Queries
+
+### Note
+
+- Array values:
+
+    * at least one value in array satisfies all inequallity filter --> have result entity
+    * at least one value in array satisfies one of equalitity filters --> have result entity
+
+     
+
 - kind
 - filters (zero or more)
     * key filters

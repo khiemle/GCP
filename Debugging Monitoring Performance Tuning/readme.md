@@ -10,6 +10,15 @@
 - can export to Big Query(analysis), Cloud pub/sub(streaming message),
 cloud storage (back up)
 
+
+## Sending Application metrics
+- Install StackDriver Logging and Monitoring Agents
+- Install metrics collection library: OpenCensus 
+- Install StackDriver Exporter: OpenCencus Exporter
+- In code
+    * Create `stats` and `record`    
+    * Create view base of stats
+    * Use the exporter: the library require to set the resource 
 ## Monitoring
 
 - Gather metrics

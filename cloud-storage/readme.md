@@ -38,7 +38,9 @@ gsutil ls -al gs://...
 
 ## Cross-Origin Resource Sharing (CORS)
 ```
-gsutil cors set <json file>
+gsutil cors set <json file> <bucket path>
 ```
+
+Use `CORS` when you want to access the files/objects inside bucket with website
 
 

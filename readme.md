@@ -20,6 +20,11 @@ PaaS Platform as services:
 Hybrid: 
 * Kubernetes Engine
 
+## Get response code by curl
+```
+curl -o /dev/null -s -w "%{http_code}\n"  http://$EXTERNAL_IP
+```
+
 ## `sed` command
 ```
 sed -i -e 's/PROJECT_ID/'$DEVSHELL_PROJECT_ID/ mydeploy.yaml
